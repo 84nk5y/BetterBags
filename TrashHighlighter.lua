@@ -1,4 +1,4 @@
-local function MyUpdateItems(self)
+local function HighlightTrashItems(self)
     for _, itemButton in self:EnumerateItems() do
         if itemButton.myIcon then
             itemButton.myIcon:Hide()
@@ -23,14 +23,17 @@ local function MyUpdateItems(self)
     end
 end
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function()
-    frame:UnregisterAllEvents()
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self, event, ...)
+    local isInitialLogin, isReloadingUi = ...
+    if isInitialLogin or isReloadingUi then
+        for i = 1, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
+            local frame = ContainerFrameContainer.ContainerFrames[i]
+            hooksecurefunc(frame, "UpdateItems", HighlightTrashItems)
+        end
+        hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", HighlightTrashItems)
 
-    for i = 1, 5 do
-        local frame = ContainerFrameContainer.ContainerFrames[i]
-        hooksecurefunc(frame, "UpdateItems", MyUpdateItems)
+        self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     end
-    hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", MyUpdateItems)
 end)

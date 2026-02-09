@@ -1,4 +1,4 @@
-local function repair()
+local function Repair()
     if CanMerchantRepair() then
         local repairAllCost, canRepair = GetRepairAllCost();
         if canRepair then
@@ -16,11 +16,8 @@ local function repair()
     end
 end
 
-local myFrame = CreateFrame("frame")
-myFrame:RegisterEvent("MERCHANT_SHOW")
-myFrame:RegisterEvent("MERCHANT_CLOSED")
-myFrame:SetScript("OnEvent", function(self, event)
-    if event == "MERCHANT_SHOW" then
-        repair()
-    end
+local f = CreateFrame("Frame")
+f:RegisterEvent("MERCHANT_SHOW")
+f:SetScript("OnEvent", function(self, event, ...)
+    if event == "MERCHANT_SHOW" then Repair() end
 end)
