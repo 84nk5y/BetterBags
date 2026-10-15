@@ -28,27 +28,27 @@ local function Repair()
         local guildFundsAfter = GetGuildBankWithdrawMoney()
 
         if guildFundsBefore == -1 then
-            print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetCoinTextureString(repairAllCost).." |cff00FF00(Guild paid all)|r")
+            print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetMoneyString(repairAllCost).." |cff00FF00(Guild paid all)|r")
         else
             local guildPaid = guildFundsBefore - guildFundsAfter
             local playerPaid = repairAllCost - guildPaid
 
             if guildPaid > 0 then
                 if playerPaid == 0 then
-                    print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetCoinTextureString(repairAllCost).." |cff00FF00(Guild paid all)|r")
+                    print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetMoneyString(repairAllCost).." |cff00FF00(Guild paid all)|r")
                 else
-                    print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetCoinTextureString(repairAllCost)..
-                        "  |cff00FF00(Guild: "..GetCoinTextureString(guildPaid)..")|r"..
-                        "  |cffFFFFFF(Player: "..GetCoinTextureString(playerPaid).."|r)")
+                    print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetMoneyString(repairAllCost)..
+                        "  |cff00FF00(Guild: "..GetMoneyString(guildPaid)..")|r"..
+                        "  |cffFFFFFF(Player: "..GetMoneyString(playerPaid).."|r)")
                 end
             else
-                print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetCoinTextureString(repairAllCost).." |cffFFFFFF(Player funds)|r")
+                print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetMoneyString(repairAllCost).." |cffFFFFFF(Player funds)|r")
             end
         end
     else
         RepairAllItems(false)
 
-        print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetCoinTextureString(repairAllCost).." |cffFFFFFF(Player funds)|r")
+        print("|cffB0C4DE["..ADDON_NAME.."]|r Repair cost: "..GetMoneyString(repairAllCost).." |cffFFFFFF(Player funds)|r")
     end
 end
 
